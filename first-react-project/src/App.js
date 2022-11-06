@@ -13,6 +13,7 @@ let localStorageKey = "todosApp.myTodos"
 function App() {
 	//todos below is every one of the todos in the useState, second variable is function we call to update the todos
 	let todoNameRef = useRef()
+	const [inputValue, setInputValue] = useState("")
 	const [myTodos, setTodos] = useState([])
 
 	//this use effect is only called once when component loads
@@ -38,21 +39,30 @@ function App() {
 	}
 
 	let handleAddTodo = (e) => {
-		let nameRef = todoNameRef.current.value
-		if (nameRef === "") return
+		// let nameRef = todoNameRef.current.value
+		if (inputValue === "") return
 		setTodos((prevTodo) => {
 			return [
 				...prevTodo,
-				{ id: uuidv4(), name: nameRef, age: 30, complete: false },
+				{ id: uuidv4(), name: inputValue, age: 30, complete: false },
 			]
 		})
-		todoNameRef.current.value = null
+		// todoNameRef.current.value = null
+		setInputValue("")
 	}
 	return (
 		<>
 			<TodoList todos={myTodos} />
 			{/* React.render(Todolist, {todos: myTodos}) */}
-			<input ref={todoNameRef} type="text" />
+			<input
+				value={inputValue}
+				onChange={(e) => {
+					setInputValue(e.target.value)
+				}}
+				ref={todoNameRef}
+				type="text"
+			/>
+			<div>{inputValue}</div>
 			<button onClick={handleAddTodo}>add todo </button>
 			<button>clear complete</button>
 			<div>number left todo</div>
