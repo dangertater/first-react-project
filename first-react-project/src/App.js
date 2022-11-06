@@ -10,10 +10,11 @@ import TodoList from "./TodoList.js"
 
 function App() {
 	//todos below is every one of the todos in the useState, second variable is function we call to update the todos
-	const [todos, setTodos] = useState(["Todo 1", "Todo 2"])
+	const [myTodos, setTodos] = useState(["Todo 1", "Todo 2"])
 	return (
 		<>
-			<TodoList todos={todos} />
+			<TodoList todos={myTodos} />
+			{/* React.render(Todolist, {todos: myTodos}) */}
 			<input type="text" />
 			<button>add todo </button>
 			<button>clear complete</button>
